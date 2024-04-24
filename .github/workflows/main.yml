@@ -1,10 +1,10 @@
-name: Cypress Docker Push
+name: Python Docker Push
 on: 
   push: 
     branches: [ "master" ]
   
 jobs:
-  Cypress-Test:
+  python-Test:
    
   
     name: Build Docker Image
@@ -32,5 +32,5 @@ jobs:
             ECR_REPOSITORY: ${{secrets.AWS_ECR_REPO}}
             IMAGE_TAG: latest
           run: |
-            docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:python:latest .
-            docker push $ECR_REGISTRY/$ECR_REPOSITORY:python:latest
+            docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:latest .
+            docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
