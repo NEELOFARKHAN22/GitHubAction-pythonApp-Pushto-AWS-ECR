@@ -57,16 +57,16 @@ Follow these steps to create an AWS Identity and Access Management (IAM) user wi
 
 - **Create IAM User:**
   - Navigate to the [IAM Management Console](https://console.aws.amazon.com/iam/).
-  - Click on **Users** in the left sidebar.
-  - Click on **Add user**.
+  - Click on `Users` in the left sidebar.
+  - Click on `Add user`.
   - Enter a username for the IAM user.
-  - Select **Programmatic access** as the access type.
-  - Click **Next: Permissions**.
+  - Select `Programmatic access` as the access type.
+  - Click `Next: Permissions`.
 
 - **Attach Policy:**
   - In the permissions section, select **Attach existing policies directly**.
-  - Search for and select the policy named **AmazonEC2ContainerRegistryFullAccess**.
-  - Click **Next: Tags**.
+  - Search for and select the policy named `AmazonEC2ContainerRegistryFullAccess`.
+  - Click `Next: Tags`.
 
 - **Tags (Optional):**
   - Optionally, add any tags if necessary.
@@ -74,7 +74,7 @@ Follow these steps to create an AWS Identity and Access Management (IAM) user wi
 
 - **Review and Create User:**
   - Review the user details and attached policies.
-  - Click **Create user**.
+  - Click `Create user`.
 
 - **Access Key Creation:**
   - After the user is created, note down the **Access key ID** and **Secret access key**.
