@@ -2,6 +2,19 @@
 
 Setting up a CI/CD pipeline using GitHub Actions to deploy a Dockerized Python application to AWS ECS.
 
+## Table of Contents
+
+1. [Overview](#overview)
+2. [Setting Up the GitHub Repository](#setting-up-the-github-repository)
+3. [Configuring AWS ECR](#configuring-aws-ecr)
+4. [Configuring IAM](#configuring-iam)
+5. [Configure GitHub Secrets](#configure-github-secrets)
+6. [Creating GitHub Actions Workflow](#creating-github-actions-workflow)
+7. [Configuring ECS (Amazon Elastic Container Service)](#configuring-ecs-amazon-elastic-container-service)
+   - [Configuring ECS Task Definition](#configuring-ecs-task-definition)
+   - [Configuring ECS Cluster](#configuring-ecs-cluster)
+   - [Configuring Service](#configuring-service)
+8. [Final Output](#final-output)
 ## Overview
 
 In this project, I explore the fundamental concepts of GitHub Actions pipeline. The goal is to push a Docker Python application image to AWS ECR (Elastic Container Registry) using GitHub Actions and deploy it to AWS ECS (Elastic Container Service).
