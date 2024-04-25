@@ -17,7 +17,7 @@ In this project, I explore the basic concepts of GitHub Actions pipeline. The go
   - requirement.txt
   - Index.html
 - Set up a GitHub Actions workflow (`main.yml`) to define the pipeline stages.
-  - .github/workflows/main.yml.
+  - (.github/workflows/main.yml).
 
 ### 2. Configuring AWS ECR
 
@@ -50,3 +50,13 @@ In this project, I explore the basic concepts of GitHub Actions pipeline. The go
 This README provides a step-by-step guide to set up a CI/CD pipeline using GitHub Actions for deploying Dockerized applications to AWS ECS. Follow these instructions to streamline your development and deployment processes.
 
 Feel free to contribute or provide feedback!
+
+## Additional Information on main.yml Keywords
+
+- `uses`: Specifies the action to be used for checking out the repository, configuring AWS credentials, and logging in to Amazon ECR.
+- `name`: Provides a descriptive name for each step in the workflow.
+- `runs-on`: Defines the operating system environment on which the job will run.
+- `steps`: Contains a list of actions or commands to be executed as part of the job.
+- `with`: Specifies input parameters or configuration options for an action.
+- `env`: Sets environment variables to be used during the job execution.
+- `run`: Executes shell commands or scripts within the job environment.
