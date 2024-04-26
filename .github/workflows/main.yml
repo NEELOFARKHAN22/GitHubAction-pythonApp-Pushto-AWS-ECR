@@ -22,8 +22,11 @@ jobs:
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
           
+      - name: Count commits
+        run: echo "COMMIT_COUNT=$(git rev-list --count HEAD)" >> $GITHUB_ENV
+
       - name: Set IMAGE_TAG
-        run: echo "IMAGE_TAG=v${{ github.run_number }}" >> $GITHUB_ENV
+        run: echo "IMAGE_TAG=v${COMMIT_COUNT}" >> $GITHUB_ENV
 
       - name: Build and push the tagged docker image to Amazon ECR
         env:
