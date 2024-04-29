@@ -30,7 +30,7 @@ jobs:
           env:
             ECR_REGISTRY: ${{ steps.login-pf-aws-ecr.outputs.registry }}
             ECR_REPOSITORY: ${{secrets.AWS_ECR_REPO}}
-            IMAGE_TAG: v6
+            IMAGE_TAG: ${{github.run_number}}
           run: |
             docker build -t $ECR_REPOSITORY:$IMAGE_TAG .
             docker push $ECR_REPOSITORY:$IMAGE_TAG
