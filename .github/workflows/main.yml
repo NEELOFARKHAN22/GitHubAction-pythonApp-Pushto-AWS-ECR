@@ -2,12 +2,13 @@ name: Python Docker Push
 on: 
   push: 
     branches: [ "master" ]
-AWS_REGION: us-east-1                   
-ECR_REPOSITORY: demo-repo        
-ECS_SERVICE: demo-service               
-ECS_CLUSTER: demo-ecs-cluster              
-ECS_TASK_DEFINITION: .aws/td.json 
-CONTAINER_NAME: container-1
+env:
+  AWS_REGION: us-east-1                   
+  ECR_REPOSITORY: demo-repo        
+  ECS_SERVICE: demo-service               
+  ECS_CLUSTER: demo-ecs-cluster              
+  ECS_TASK_DEFINITION: .aws/td.json 
+  CONTAINER_NAME: container-1
   
 jobs:
   python-Test: 
