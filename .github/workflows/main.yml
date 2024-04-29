@@ -7,11 +7,11 @@ on:
 
 env:
   AWS_REGION: us-east-1                   
-  ECR_REPOSITORY: Project-1      
+  ECR_REPOSITORY: project-1      
   ECS_SERVICE: PythonApplication-service              
   ECS_CLUSTER: cluster-v2              
   ECS_TASK_DEFINITION: Docker-Image-Configuration-Task-1
-  CONTAINER_NAME: container-1
+  CONTAINER_NAME: python-app-container
   
 jobs:
   python-Test: 
