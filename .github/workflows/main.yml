@@ -7,7 +7,7 @@ env:
   ECR_REPOSITORY: Project-1      
   ECS_SERVICE: PythonApplication-service              
   ECS_CLUSTER: cluster-v2              
-  ECS_TASK_DEFINITION: .aws/td.json 
+  ECS_TASK_DEFINITION: task-definition.json
   CONTAINER_NAME: container-1
   
 jobs:
@@ -43,7 +43,7 @@ jobs:
             
         - name: Download task definition
           run: |
-              aws ecs describe-task-definition --task-definition ${{ vars.ECS_TASK_DEFINITION }} \
+              aws ecs describe-task-definition --task-definition ${{ env.ECS_TASK_DEFINITION }} \
               --query taskDefinition > task-definition.json
       
         
