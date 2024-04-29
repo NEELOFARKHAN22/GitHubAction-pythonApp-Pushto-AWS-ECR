@@ -136,13 +136,19 @@ Follow these steps to create a GitHub Actions workflow for your repository. This
         - name: Login to Amazon ECR
           id: login-ecr
           uses: aws-actions/amazon-ecr-login@v1
-          
+        - name: Get commit hash
+          id: get-commit-hash
+          run: echo "::set-output name=commit-hash::$(git rev-parse --short HEAD)"
+        - name: Get timestamp
+          id: get-timestamp
+          run: echo "::set-output name=timestamp::$(date +'%Y-%m-%d-%H-%M')"
+
 
         - name: Build and push the tagged docker image to Amazon ECR
           env:
             ECR_REGISTRY: ${{ steps.login-pf-aws-ecr.outputs.registry }}
             ECR_REPOSITORY: ${{secrets.AWS_ECR_REPO}}
-            IMAGE_TAG: v6
+            IMAGE_TAG:${{ steps.get-commit-hash.outputs.commit-hash }}-${{ steps.get-timestamp.outputs.timestamp }}
           run: |
             docker build -t $ECR_REPOSITORY:$IMAGE_TAG .
             docker push $ECR_REPOSITORY:$IMAGE_TAG
