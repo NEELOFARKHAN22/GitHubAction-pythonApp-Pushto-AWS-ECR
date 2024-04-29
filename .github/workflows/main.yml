@@ -2,6 +2,12 @@ name: Python Docker Push
 on: 
   push: 
     branches: [ "master" ]
+AWS_REGION: us-east-1                   
+ECR_REPOSITORY: demo-repo        
+ECS_SERVICE: demo-service               
+ECS_CLUSTER: demo-ecs-cluster              
+ECS_TASK_DEFINITION: .aws/td.json 
+CONTAINER_NAME: container-1
   
 jobs:
   python-Test: 
@@ -40,11 +46,7 @@ jobs:
               task-definition: ${{ env.ECS_TASK_DEFINITION }}
               container-name: ${{ env.CONTAINER_NAME }}
               image: ${{ steps.build-image.outputs.image }}
-          env:
-            AWS_DEFAULT_REGION: us-east-1
-            AWS_REGION: us-east-1
-            AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-            AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+           
         - name: Deploy Amazon ECS task definition
           uses: aws-actions/amazon-ecs-deploy-task-definition@v1
           with:
