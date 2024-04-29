@@ -7,7 +7,7 @@ env:
   ECR_REPOSITORY: Project-1      
   ECS_SERVICE: PythonApplication-service              
   ECS_CLUSTER: cluster-v2              
-  ECS_TASK_DEFINITION: task-definition-app
+  ECS_TASK_DEFINITION: Docker-Image-Configuration-Task-1
   CONTAINER_NAME: container-1
   
 jobs:
@@ -52,7 +52,7 @@ jobs:
           id: task-def
           uses: aws-actions/amazon-ecs-render-task-definition@v1
           with:
-              task-definition: task-definition-app
+              task-definition: Docker-Image-Configuration-Task-1
               container-name: ${{ env.CONTAINER_NAME }}
               Image: ${{ steps.build-image.outputs.image }}
            
