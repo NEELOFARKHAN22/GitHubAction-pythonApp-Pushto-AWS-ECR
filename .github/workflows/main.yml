@@ -4,9 +4,7 @@ on:
     branches: [ "master" ]
   
 jobs:
-  python-Test:
-   
-  
+  python-Test: 
     name: Build Docker Image
     runs-on: ubuntu-latest  
     steps:  
