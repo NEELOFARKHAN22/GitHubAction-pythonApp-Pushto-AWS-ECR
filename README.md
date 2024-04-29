@@ -220,8 +220,8 @@ After configuring the service in your ECS cluster, follow these steps to access 
    - Once the service is created, ECS will initiate the tasks specified in the task definition.   
 2. **Access Application**:
    - You can access your application using the following endpoints:
-     - Load Balancer: [http://lb-5-314674044.us-east-1.elb.amazonaws.com:5000/](http://lb-5-314674044.us-east-1.elb.amazonaws.com:5000/)
-     - Public IP: [http://44.204.40.178:5000/](http://44.204.40.178:5000/)
+     - Load Balancer: [http://lb-pythonapplication-1032831279.us-east-1.elb.amazonaws.com:5000/](http://lb-pythonapplication-1032831279.us-east-1.elb.amazonaws.com:5000/)
+     - Public IP: [http://54.226.28.161:5000/](http://54.226.28.161:5000/)
    
 3. **Application Testing**:
    - Open your web browser and navigate to one of the provided URLs.
