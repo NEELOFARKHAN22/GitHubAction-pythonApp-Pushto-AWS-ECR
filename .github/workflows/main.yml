@@ -41,11 +41,11 @@ jobs:
             docker push $ECR_REPOSITORY:$IMAGE_TAG
             echo "::set-output name=build-image::$ECR_REPOSITORY:$IMAGE_TAG"
             
-        - name: Download task definition
-          run: |
-              aws ecs describe-task-definition --task-definition ${{ env.ECS_TASK_DEFINITION }} \
-              --query taskDefinition > Docker-Image-Configuration-Task-1-revision1.json
-          shell: /usr/bin/bash -e {0}     
+       # - name: Download task definition
+       #   run: |
+       #       aws ecs describe-task-definition --task-definition ${{ env.ECS_TASK_DEFINITION }} \
+       #       --query taskDefinition > Docker-Image-Configuration-Task-1-revision1.json
+       #   shell: /usr/bin/bash -e {0}     
       
         
         - name: Fill in the new image ID in ECS Task Definition
