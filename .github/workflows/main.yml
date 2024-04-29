@@ -40,6 +40,11 @@ jobs:
               task-definition: ${{ env.ECS_TASK_DEFINITION }}
               container-name: ${{ env.CONTAINER_NAME }}
               image: ${{ steps.build-image.outputs.image }}
+          env:
+            AWS_DEFAULT_REGION: us-east-1
+            AWS_REGION: us-east-1
+            AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+            AWS_SECRET_ACCESS_KEY: aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         - name: Deploy Amazon ECS task definition
           uses: aws-actions/amazon-ecs-deploy-task-definition@v1
           with:
