@@ -8,7 +8,7 @@ env:
   ECS_SERVICE: PythonApplication-service              
   ECS_CLUSTER: cluster-v2              
   ECS_TASK_DEFINITION: task-definition.json
-  CONTAINER_NAME: container-1
+  CONTAINER_NAME: python-app-container
   
 jobs:
   python-Test: 
@@ -54,8 +54,7 @@ jobs:
           with:
               task-definition: ${{ env.ECS_TASK_DEFINITION }}
               container-name: ${{ env.CONTAINER_NAME }}
-              image: 339712892155.dkr.ecr.us-east-1.amazonaws.com/project-1:92
-
+              image: ${{ steps.build-image.outputs.build-image }}
         - name: Deploy ECS Task Definition
           uses: aws-actions/amazon-ecs-deploy-task-definition@v1
           with:
