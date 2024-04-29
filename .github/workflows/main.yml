@@ -39,7 +39,7 @@ jobs:
           run: |
             docker build -t $ECR_REPOSITORY:$IMAGE_TAG .
             docker push $ECR_REPOSITORY:$IMAGE_TAG
-            echo "::set-output name=image::$ECR_REPOSITORY:$IMAGE_TAG"
+            echo "::set-output name=build-image::$ECR_REPOSITORY:$IMAGE_TAG"
             
         - name: Download task definition
           run: |
