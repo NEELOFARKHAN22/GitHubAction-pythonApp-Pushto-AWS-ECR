@@ -4,10 +4,10 @@ on:
     branches: [ "master" ]
   
 jobs:
-  python-Test: 
-    name: Build Docker Image
-    runs-on: ubuntu-latest  
-    steps:  
+    python-Test: 
+      name: Build Docker Image
+      runs-on: ubuntu-latest  
+      steps:  
         - name: Checkout
           uses: actions/checkout@v2    
           
