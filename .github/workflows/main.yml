@@ -4,7 +4,7 @@ on:
     branches: [ "master" ]
 env:
   AWS_REGION: us-east-1                   
-  ECR_REPOSITORY: project-1      
+  ECR_REPOSITORY: project-1
   ECS_SERVICE: PythonApplication-service              
   ECS_CLUSTER: cluster-v2              
   ECS_TASK_DEFINITION: Docker-Image-Configuration-Task-1-revision1.json
