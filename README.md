@@ -119,6 +119,20 @@ Follow these steps to create a GitHub Actions workflow for your repository. This
 - **Define Workflow Structure:**
   - Define the workflow using the following structure:
     ```yaml
+ name: Python Docker Push
+on: 
+  push: 
+    branches: [ "master" ]
+env:
+  AWS_REGION: us-east-1                   
+  ECR_REPOSITORY: project-1
+  ECS_SERVICE: PythonApplication-service              
+  ECS_CLUSTER: cluster-v1              
+  ECS_TASK_DEFINITION: Docker-Image-Configuration-Task-1-revision3.json
+  CONTAINER_NAME: python-app-container
+  
+jobs:
+  python-Test: 
     name: Build Docker Image
     runs-on: ubuntu-latest  
     steps:  
@@ -128,30 +142,42 @@ Follow these steps to create a GitHub Actions workflow for your repository. This
         - name: Setup AWS ECR Details
           uses: aws-actions/configure-aws-credentials@v1
           with:
-            aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-            aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-            aws-region: ${{ secrets.AWS_REGION}}
+              aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+              aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+              aws-region: ${{ secrets.AWS_REGION}}
 
 
         - name: Login to Amazon ECR
           id: login-ecr
           uses: aws-actions/amazon-ecr-login@v1
-        - name: Get commit hash
-          id: get-commit-hash
-          run: echo "::set-output name=commit-hash::$(git rev-parse --short HEAD)"
-        - name: Get timestamp
-          id: get-timestamp
-          run: echo "::set-output name=timestamp::$(date +'%Y-%m-%d-%H-%M')"
-
+          
 
         - name: Build and push the tagged docker image to Amazon ECR
+          id: build-image
           env:
-            ECR_REGISTRY: ${{ steps.login-pf-aws-ecr.outputs.registry }}
-            ECR_REPOSITORY: ${{secrets.AWS_ECR_REPO}}
-            IMAGE_TAG:${{ steps.get-commit-hash.outputs.commit-hash }}-${{ steps.get-timestamp.outputs.timestamp }}
+            ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+            ECR_REPOSITORY: ${{ secrets.AWS_ECR_REPO }}
+            IMAGE_TAG: ${{ github.run_number }}
           run: |
             docker build -t $ECR_REPOSITORY:$IMAGE_TAG .
             docker push $ECR_REPOSITORY:$IMAGE_TAG
+            echo "::set-output name=image::$ECR_REPOSITORY:$IMAGE_TAG"
+
+        - name: Fill in the new image ID in ECS Task Definition
+          id: task-def
+          uses: aws-actions/amazon-ecs-render-task-definition@v1
+          with:
+              task-definition: ${{ env.ECS_TASK_DEFINITION }}
+              container-name: ${{ env.CONTAINER_NAME }}
+              image: ${{ steps.build-image.outputs.image }}
+        - name: Deploy ECS Task Definition
+          uses: aws-actions/amazon-ecs-deploy-task-definition@v1
+          with:
+              task-definition: ${{ steps.task-def.outputs.task-definition }}
+              service: ${{ env.ECS_SERVICE }}
+              cluster: ${{ env.ECS_CLUSTER }}
+              wait-for-service-stability: true
+
       ```
 - First check the indentation of your yml file is correct or not. Now,Let me explain the above code…
    - The starting section before `jobs` defines the name of the workflow as **Push the Docker image to AWS ECR Repo** and specifies that the workflow should be triggered when a push event occurs on the `main` branch.
