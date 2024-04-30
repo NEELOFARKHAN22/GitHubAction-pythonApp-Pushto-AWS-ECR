@@ -119,23 +119,23 @@ Follow these steps to create a GitHub Actions workflow for your repository. This
 - **Define Workflow Structure:**
   - Define the workflow using the following structure:
     ```yaml
- name: Python Docker Push
-on: 
-  push: 
-    branches: [ "master" ]
-env:
-  AWS_REGION: us-east-1                   
-  ECR_REPOSITORY: project-1
-  ECS_SERVICE: PythonApplication-service              
-  ECS_CLUSTER: cluster-v1              
-  ECS_TASK_DEFINITION: Docker-Image-Configuration-Task-1-revision3.json
-  CONTAINER_NAME: python-app-container
+    name: Python Docker Push
+    on: 
+    push: 
+       branches: [ "master" ]
+    env:
+       AWS_REGION: us-east-1                   
+       ECR_REPOSITORY: project-1
+       ECS_SERVICE: PythonApplication-service              
+       ECS_CLUSTER: cluster-v1              
+       ECS_TASK_DEFINITION: Docker-Image-Configuration-Task-1-revision3.json
+       CONTAINER_NAME: python-app-container
   
-jobs:
-  python-Test: 
-    name: Build Docker Image
-    runs-on: ubuntu-latest  
-    steps:  
+    jobs:
+      python-Test: 
+      name: Build Docker Image
+       runs-on: ubuntu-latest  
+     steps:  
         - name: Checkout
           uses: actions/checkout@v2    
           
